@@ -13,18 +13,17 @@ if [ -f ".env" ]; then
     exit 1;
     fi
 
-    echo "generate app key"
-    php artisan key:generate
-
     echo "installing composer dependencies"
     composer install --no-interaction --prefer-dist --optimize-autoloader
+
+    echo "generate app key"
+    php artisan key:generate
 
     echo "installing npm dependencies"
     npm install
 
     echo "compiling assets"
     npm run prod
-
 
     php artisan migrate --force
 

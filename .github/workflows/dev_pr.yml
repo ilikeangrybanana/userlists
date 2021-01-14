@@ -32,24 +32,18 @@ jobs:
           php-version: 7.4
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
+          path: '**/vendor'
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Install Composer Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      - name: Get node.js cache directory
-        id: node-cache-dir
-        run: echo "::set-output name=dir::$(npm config get cache)"
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.node-cache-dir.outputs.dir }}
+          path: '**/node_modules'
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
       - name: Install NPM Dependencies

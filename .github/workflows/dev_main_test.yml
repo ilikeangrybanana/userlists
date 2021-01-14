@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.3', '7.4', '8.0']
+        php-versions: ['7.4']
 
 
     # Service container to run with "laravel-test-withdb"
@@ -34,6 +34,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: dev
 
     - name: Install PHP
       uses: shivammathur/setup-php@v2

@@ -12,7 +12,7 @@
 
 <body>
     <div class="mt-5 container">
-        <h1>Our Users</h1>
+        <h1>My Users</h1>
 
         <div class="userlist">
             @foreach (DB::table('users')->get() as $user)
